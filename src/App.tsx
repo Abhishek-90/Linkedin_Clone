@@ -3,6 +3,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
+      <h2>Let's Start building Linkedin Clone</h2>
     </div>
   );
 }
