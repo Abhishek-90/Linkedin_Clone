@@ -10,7 +10,24 @@ html {
   box-sizing: border-box;
 }
 
-* {
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+header,
+i,
+header,
+img,
+label,
+li,
+nav,
+p,
+span,
+ul {
   margin: 0;
   padding: 0;
   border: 0;
