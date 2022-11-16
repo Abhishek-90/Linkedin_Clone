@@ -29,7 +29,7 @@ const Login = () => {
 };
 
 const Container = styled.div`
-  /* padding: 0px; */
+  padding: 0px;
 `;
 
 const Nav = styled.nav`
@@ -86,7 +86,7 @@ const SignIn = styled.a`
 const Section = styled.section`
   display: flex;
   align-content: start;
-  mind-height: 700px;
+  min-height: 700px;
   padding-bottom: 138px;
   padding-top: 40px;
   padding: 60px 0;
@@ -94,11 +94,13 @@ const Section = styled.section`
   flex-wrap: wrap;
   width: 100%;
   max-width: 1128px;
-  algin-items: center;
+  align-items: center;
   margin: auto;
-  @media (max-width: 768px) {
+  
+  @media(max-width: 768px) {
     margin: auto;
     min-height: 0px;
+    justify-content: center;
   }
 `;
 
