@@ -165,7 +165,7 @@ const Google = styled.button`
 
   &:hover {
     color: rgba(0, 0, 0, 0.75);
-    background-color: rgba(207, 207, 207, 0.25);
+    background-color: rgba(207, 207, 207, 0.75);
   }
 `;
 
