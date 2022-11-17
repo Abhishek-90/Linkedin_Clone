@@ -14,19 +14,43 @@ export default function Header() {
             <input type="text" placeholder="Search" />
           </div>
           <SearchIcon>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              data-supported-dps="16x16"
-              fill="currentColor"
-              width="16"
-              height="16"
-              focusable="false"
-            >
-              <path d="M14.56 12.44L11.3 9.18a5.51 5.51 0 10-2.12 2.12l3.26 3.26a1.5 1.5 0 102.12-2.12zM3 6.5A3.5 3.5 0 116.5 10 3.5 3.5 0 013 6.5z"></path>
-            </svg>
+            <img src="/images/search-icon.svg" alt="search-icon" />
           </SearchIcon>
         </Search>
+        <Nav>
+          <NavListWrap>
+            <NavList>
+              <a>
+                <img src="/images/nav-home.svg" alt="home-icon" />
+                <span>Home</span>
+              </a>
+            </NavList>
+            <NavList>
+              <a>
+                <img src="/images/nav-network.svg" alt="networking-icon" />
+                <span>My Network</span>
+              </a>
+            </NavList>
+            <NavList>
+              <a>
+                <img src="/images/nav-jobs.svg" alt="jobs-icon" />
+                <span>Jobs</span>
+              </a>
+            </NavList>
+            <NavList>
+              <a>
+                <img src="/images/nav-messaging.svg" alt="messages-icon" />
+                <span>Messaging</span>
+              </a>
+            </NavList>
+            <NavList>
+              <a>
+                <img src="/images/nav-notifications.svg" alt="notification-icon" />
+                <span>Notifications</span>
+              </a>
+            </NavList>
+          </NavListWrap>
+        </Nav>
       </Content>
     </Container>
   );
@@ -63,19 +87,19 @@ const Search = styled.div`
 
   & > div {
     max-width: 280px;
-    input { 
+    input {
       border: none;
       box-shadow: none;
       background-color: #eef3f8;
       border-radius: 2px;
-      color: rgba(0,0,0,0.9);
+      color: rgba(0, 0, 0, 0.9);
       width: 218px;
       padding: 0 8px 0 40px;
       line-height: 1.75;
       font-weight: 400;
       font-size: 14px;
       height: 34px;
-      border-color: #dce6f1
+      border-color: #dce6f1;
       vertical-align: text-top;
     }
   }
@@ -92,4 +116,62 @@ const SearchIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const Nav = styled.nav`
+  margin-left: auto;
+  display: block;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: white;
+    width: 100%;
+  }
+`;
+
+const NavListWrap = styled.ul`
+  display: flex;
+  flex-wrap: nowrap;
+  list-style-type: none;
+`;
+
+const NavList = styled.li`
+  display: flex;
+  align-items: center;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    min-height: 42px;
+    min-width: 80px;
+    text-decoration: none;
+    position: relative;
+
+    span {
+      color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+    }
+
+    @media(max-width: 768px) {
+      min-width: 70px;
+    }
+  }
+
+  &:hover,
+  &:active {
+    a {
+      span {
+        color: rgba(0, 0, 0, 0.9);
+      }
+    }
+  }
 `;
