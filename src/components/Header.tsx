@@ -19,7 +19,7 @@ export default function Header() {
         </Search>
         <Nav>
           <NavListWrap>
-            <NavList>
+            <NavList className="active">
               <a>
                 <img src="/images/nav-home.svg" alt="home-icon" />
                 <span>Home</span>
@@ -45,10 +45,32 @@ export default function Header() {
             </NavList>
             <NavList>
               <a>
-                <img src="/images/nav-notifications.svg" alt="notification-icon" />
+                <img
+                  src="/images/nav-notifications.svg"
+                  alt="notification-icon"
+                />
                 <span>Notifications</span>
               </a>
             </NavList>
+
+            <User>
+              <a>
+                <img src="/images/user.svg" alt="" />
+                <span>
+                  Me
+                  <img src="/images/down-icon.svg" alt="" />
+                </span>
+              </a>
+            </User>
+            <Work>
+            <a>
+                <img src="/images/nav-work.svg" alt="" />
+                <span>
+                  Work
+                  <img src="/images/down-icon.svg" alt="" />
+                </span>
+              </a>
+            </Work>
           </NavListWrap>
         </Nav>
       </Content>
@@ -135,6 +157,20 @@ const NavListWrap = styled.ul`
   display: flex;
   flex-wrap: nowrap;
   list-style-type: none;
+
+  .active {
+    span:after {
+      content: "";
+      transform: scaleX(1);
+      border-bottom: 2px solid var(--white, #fff);
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      transition: transform 0.2s ease-in-out;
+      width: 100%;
+      border-color: rgba(0, 0, 0, 0.9);
+    }
+  }
 `;
 
 const NavList = styled.li`
@@ -161,7 +197,7 @@ const NavList = styled.li`
       align-items: center;
     }
 
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
       min-width: 70px;
     }
   }
@@ -174,4 +210,21 @@ const NavList = styled.li`
       }
     }
   }
+`;
+
+const User = styled(NavList)`
+  a > img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+`;
+
+const Work = styled(User)`
+  border-left: 1px solid rgba(0,0,0,0.08);
 `;
