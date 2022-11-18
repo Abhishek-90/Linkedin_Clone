@@ -61,9 +61,12 @@ export default function Header() {
                   <img src="/images/down-icon.svg" alt="" />
                 </span>
               </a>
+                <SignOut>
+                  <a>Sign Out</a>
+                </SignOut>
             </User>
             <Work>
-            <a>
+              <a>
                 <img src="/images/nav-work.svg" alt="" />
                 <span>
                   Work
@@ -212,6 +215,23 @@ const NavList = styled.li`
   }
 `;
 
+const SignOut = styled.div`
+  position: absolute;
+  top: 40px;
+  background: white;
+  border-radius: 0 0 5px 5px;
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+  /* color: #003fbb;
+  box-shadow: 0 2px 6px 2px rgba(207, 207, 207, 0.6); */
+  transition-duration: 167ms;
+  display: none;
+
+  @media(max-width: 768px) {
+  }
+`;
+
 const User = styled(NavList)`
   a > img {
     width: 24px;
@@ -223,8 +243,16 @@ const User = styled(NavList)`
     display: flex;
     align-items: center;
   }
+
+  &:hover {
+    ${SignOut} {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 `;
 
 const Work = styled(User)`
-  border-left: 1px solid rgba(0,0,0,0.08);
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
 `;
