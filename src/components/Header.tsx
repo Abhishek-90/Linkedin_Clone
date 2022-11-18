@@ -223,8 +223,6 @@ const SignOut = styled.div`
   width: 100px;
   height: 40px;
   font-size: 16px;
-  /* color: #003fbb;
-  box-shadow: 0 2px 6px 2px rgba(207, 207, 207, 0.6); */
   transition-duration: 167ms;
   display: none;
 
