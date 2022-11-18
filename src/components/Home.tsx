@@ -1,23 +1,27 @@
 import styled from "styled-components";
+import Leftside from "./Leftside";
+import Main from "./Main";
+import Rightside from "./Rightside";
 
 function Home() {
   return (
     <Container>
-      {/* <Content> */}
-      <Section>
-        <h5>
-          <a>Hiring in a hurry? - </a>
-        </h5>
-        <p>
-          Find Talended pros in record time with Upwork and keep business Moving
-        </p>
-      </Section>
-      {/* </Content> */}
-      <Layout>
-        <div>Left Side</div>
-        <div>Main</div>
-        <div>Right Side</div>
-      </Layout>
+      <Content>
+        <Section>
+          <h5>
+            <a>Hiring in a hurry? - </a>
+          </h5>
+          <p>
+            Find Talended pros in record time with Upwork and keep business
+            Moving
+          </p>
+        </Section>
+        <Layout>
+          <Leftside />
+          <Main />
+          <Rightside />
+        </Layout>
+      </Content>
     </Container>
   );
 }
@@ -71,10 +75,10 @@ const Layout = styled.div`
   row-gap: 25px;
   margin: 25px 0;
 
-  @media(max-width: 768px) {
+  @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    padding: 0 5px; 
+    padding: 0 5px;
   }
 `;
 
