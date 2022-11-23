@@ -115,6 +115,7 @@ const AddPhotoText = styled.div`
 const Widget = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   padding: 12px 0;
+  text-decoration: none;
   a {
     display: flex;
     justify-content: space-between;
