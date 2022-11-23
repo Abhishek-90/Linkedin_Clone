@@ -160,6 +160,7 @@ const NavListWrap = styled.ul`
   display: flex;
   flex-wrap: nowrap;
   list-style-type: none;
+  justify-content: center;
 
   .active {
     span:after {
