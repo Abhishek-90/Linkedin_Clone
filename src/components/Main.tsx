@@ -27,6 +27,65 @@ function Main() {
           </button>
         </div>
       </ShareBox>
+      <div>
+        <ArticleBox>
+          <SharedActor>
+            <a>
+              <img src="/images/user.svg" alt="" />
+              <div>
+                <span>Abhishek Holani</span>
+                <span>a@gmail.com</span>
+                <span>21/03/2022</span>
+              </div>
+            </a>
+            <button>
+              <img src="/images/ellipsis.svg" alt="" />
+            </button>
+          </SharedActor>
+          <Description>Description</Description>
+          <SharedImg>
+            <a>
+              <img src="/images/shared-img.jpg" alt="" />
+            </a>
+          </SharedImg>
+          <SocialCount>
+            <li>
+              <button>
+                <img
+                  src="https://static-exp1.licdn.com/sc/h/2uxqgankkcxm505qn812vqyss"
+                  alt=""
+                />
+                <img
+                  src="https://static-exp1.licdn.com/sc/h/cm8d2ytayynyhw5ieaare0tl3"
+                  alt=""
+                />
+              </button>
+              <span>75</span>
+            </li>
+            <li>
+              <a>2 comments</a>
+            </li>
+          </SocialCount>
+          <SocialActions>
+            <button>
+              <img src="/images/post-like.svg" alt="" />
+              <span>Like</span>
+            </button>
+            <button>
+              <img src="/images/post-comment.svg" alt="" />
+              <span>Comment</span>
+            </button>
+            <button>
+              <img src="/images/post-repost.svg" alt="" />
+              <span>Repost</span>
+            </button>
+            <button>
+              <img src="/images/post-send.svg" alt="" />
+              <span>Send</span>
+            </button>
+          </SocialActions>
+        </ArticleBox>
+      </div>
     </Container>
   );
 }
@@ -104,6 +163,137 @@ const ShareBox = styled(CommonCard)`
           color: #70b5f9;
         }
       }
+    }
+  }
+`;
+
+const ArticleBox = styled(CommonCard)`
+  overflow: visible;
+  margin: 0 0 8px;
+  padding: 0;
+`;
+
+const SharedActor = styled.div`
+  background: transparent;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 12px 16px 0;
+  margin-bottom: 8px;
+
+  button {
+    outline: none;
+    border: none;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    right: 12px;
+  }
+
+  a {
+    flex-grow: 1;
+    margin-right: 12px;
+    display: flex;
+    overflow: hidden;
+    text-decoration: none;
+
+    img {
+      width: 48px;
+      height: 48px;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      flex-basis: 1;
+      margin-left: 8px;
+      font-size: 14px;
+      text-align: left;
+
+      span {
+        line-height: 1.33;
+
+        &:first-child {
+          font-weight: 700;
+          color: rgba(0, 0, 0, 1);
+        }
+
+        &:nth-child(n + 1) {
+          color: rgba(0, 0, 0, 0.6);
+        }
+      }
+    }
+  }
+`;
+
+const Description = styled.div`
+  overflow: hidden;
+  padding: 0 16px;
+  color: rgba(0, 0, 0, 0.9);
+  text-align: left;
+  font-size: 14px;
+`;
+
+const SharedImg = styled.div`
+  margin-top: 8px;
+  img {
+    width: 100%;
+  }
+`;
+
+const SocialCount = styled.ul`
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+  padding: 8px 0;
+  margin: 0 16px;
+  line-height: 1.3;
+  border-bottom: 1px solid #e9e5df;
+
+  li {
+    font-size: 12px;
+
+    &:first-child {
+      display: flex;
+      align-items: center;
+      margin-right: 16px;
+
+      button {
+        background: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 16px;
+          &:nth-child(n + 2) {
+            margin-left: -4px;
+          }
+        }
+      }
+    }
+  }
+`;
+
+const SocialActions = styled.div`
+  display: flex;
+  padding: 4px 8px;
+  justify-content: space-around;
+  min-height: 42px;
+
+  & > button {
+    background: transparent;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+    img {
+      margin-right: 4px;
+    }
+    span {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.6);
     }
   }
 `;
