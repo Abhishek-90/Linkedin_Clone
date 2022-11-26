@@ -227,11 +227,13 @@ const SharedActor = styled.div`
 `;
 
 const Description = styled.div`
-  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
   padding: 0 16px;
   color: rgba(0, 0, 0, 0.9);
   text-align: left;
   font-size: 14px;
+  overflow: hidden;
 `;
 
 const SharedImg = styled.div`
@@ -286,14 +288,23 @@ const SocialActions = styled.div`
     border: none;
     display: inline-flex;
     align-items: center;
-    padding: 8px;
+    padding: 8px 12px;
+    transition-duration: 167ms;
+    border-radius: 5px;
     img {
       margin-right: 4px;
+
+      @media (min-width: 768px) {
+        margin-right: 8px;
+      }
     }
     span {
       font-size: 14px;
       font-weight: 600;
       color: rgba(0, 0, 0, 0.6);
+    }
+    &:hover {
+      background: rgba(0, 0, 0, 0.15);
     }
   }
 `;
