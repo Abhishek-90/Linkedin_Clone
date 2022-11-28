@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { signInAPI } from "../actions";
 
-const Login = () => {
+const Login = (props: any) => {
   return (
     <Container>
       <Nav>
@@ -18,7 +20,7 @@ const Login = () => {
           <img src="/images/login-hero.svg" alt="login-hero" />
         </Hero>
         <Form>
-          <Google>
+          <Google onClick={() => props.signIn()}>
             <img src="/images/google.svg" alt="google-icon" />
             Sign in with Google
           </Google>
@@ -96,8 +98,8 @@ const Section = styled.section`
   max-width: 1128px;
   align-items: center;
   margin: auto;
-  
-  @media(max-width: 768px) {
+
+  @media (max-width: 768px) {
     margin: auto;
     min-height: 0px;
     justify-content: center;
@@ -171,4 +173,12 @@ const Google = styled.button`
   }
 `;
 
-export default Login;
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch: any) => ({
+  signIn: () => dispatch(signInAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
