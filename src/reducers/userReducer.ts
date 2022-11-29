@@ -1,12 +1,19 @@
-const INITIAL_STATE = {
-  user: null
-}
+import { SET_USER } from "../actions/actionType";
 
-const userReducer = (state=INITIAL_STATE, action:any) => {
-  switch(action.type) {
+const INITIAL_STATE = {
+  user: null,
+};
+
+const userReducer = (state = INITIAL_STATE, action: any) => {
+  switch (action.type) {
+    case SET_USER:
+      return {
+        ...state,
+        user: action.user,
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default userReducer;
