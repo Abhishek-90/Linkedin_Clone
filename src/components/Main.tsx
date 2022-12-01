@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { connect } from "react-redux";
 
-function Main() {
+function Main(props: any) {
   return (
     <Container>
       <ShareBox>
         <div>
-          <img src="/images/user.svg" alt="" />
+          <img src={props.user.photoURL} alt="" />
           <button>Start a Post</button>
         </div>
         <div>
@@ -309,4 +310,10 @@ const SocialActions = styled.div`
   }
 `;
 
-export default Main;
+const mapStateToProps = (state: any) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+export default connect(mapStateToProps)(Main);

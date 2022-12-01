@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { connect } from "react-redux";
 
-export default function Header() {
+function Header(props: any) {
   return (
     <Container>
       <Content>
@@ -55,15 +56,15 @@ export default function Header() {
 
             <User>
               <a>
-                <img src="/images/user.svg" alt="" />
+                <img src={props.user?.photoURL} alt="" />
                 <span>
                   Me
                   <img src="/images/down-icon.svg" alt="" />
                 </span>
               </a>
-                <SignOut>
-                  <a>Sign Out</a>
-                </SignOut>
+              <SignOut>
+                <a>Sign Out</a>
+              </SignOut>
             </User>
             <Work>
               <a>
@@ -227,7 +228,7 @@ const SignOut = styled.div`
   transition-duration: 167ms;
   display: none;
 
-  @media(max-width: 768px) {
+  @media (max-width: 768px) {
   }
 `;
 
@@ -255,3 +256,11 @@ const User = styled(NavList)`
 const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
 `;
+
+const mapStateToProps = (state: any) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+export default connect(mapStateToProps)(Header);
