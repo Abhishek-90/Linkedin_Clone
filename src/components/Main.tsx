@@ -6,7 +6,11 @@ function Main(props: any) {
     <Container>
       <ShareBox>
         <div>
-          <img src={props.user?.photoURL} alt="" />
+          {props.user && props.user.photoURL ? (
+            <img src={props.user.photoURL} alt="" />
+          ) : (
+            <img src="/images/user.svg" alt="user" />
+          )}
           <button>Start a Post</button>
         </div>
         <div>
@@ -316,4 +320,6 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = (state: any) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

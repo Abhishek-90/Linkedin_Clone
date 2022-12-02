@@ -56,7 +56,11 @@ function Header(props: any) {
 
             <User>
               <a>
-                <img src={props.user?.photoURL} alt="" />
+                {props.user && props.user.photoURL ? (
+                  <img src={props.user.photoURL} alt="" />
+                ) : (
+                  <img src="/images/user.svg" alt="user" />
+                )}
                 <span>
                   Me
                   <img src="/images/down-icon.svg" alt="" />
@@ -263,4 +267,6 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (state: any) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
