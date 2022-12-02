@@ -14,3 +14,24 @@ export function signInAPI() {
       .catch((e: any) => alert(e.message));
   };
 }
+
+export function getUserAuth() {
+  return (dispatch: any) => {
+    auth.onAuthStateChanged(async (user: any) => {
+      if (user) {
+        dispatch(setUser(user));
+      }
+    });
+  };
+}
+
+export function signOutAPI() {
+  return (dispatch: any) => {
+    auth
+      .signOut()
+      .then(() => {
+        dispatch(setUser(null));
+      })
+      .catch((e: any) => console.log(e.message));
+  };
+}
