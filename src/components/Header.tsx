@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { signOutAPI } from "../actions";
 
 function Header(props: any) {
-  console.log(props.user?.photoURL);
   return (
     <Container>
       <Content>
