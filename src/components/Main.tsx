@@ -6,7 +6,7 @@ function Main(props: any) {
     <Container>
       <ShareBox>
         <div>
-          <img src={props.user.photoURL} alt="" />
+          <img src={props.user?.photoURL} alt="" />
           <button>Start a Post</button>
         </div>
         <div>
