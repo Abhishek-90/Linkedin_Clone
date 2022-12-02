@@ -9,7 +9,7 @@ function Leftside(props: any) {
           <CardBackground />
           <a>
             <Photo />
-            <Link>Welcome, {props.user.displayName}!</Link>
+            <Link>Welcome, {props.user?.displayName}!</Link>
           </a>
           <a>
             <AddPhotoText>Add a Photo</AddPhotoText>
