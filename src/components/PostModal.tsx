@@ -1,6 +1,7 @@
+import { connect } from "react-redux";
 import styled from "styled-components";
 
-export default function PostModal() {
+function PostModal(props: any) {
   return (
     <Container>
       <Content>
@@ -10,6 +11,23 @@ export default function PostModal() {
             <img src="/images/close.svg" alt="" />
           </button>
         </Header>
+        <SharedContent>
+          <UserInfo>
+            <div>
+              <a>
+                {props.user && props.user.photoURL ? (
+                  <img src={props.user.photoURL} alt="" />
+                ) : (
+                  <img src="/images/user.svg" alt="" />
+                )}
+              </a>
+            </div>
+            <div>
+              <a>{props.user?.displayName}</a>
+            </div>
+          </UserInfo>
+        </SharedContent>
+        <SharedActions>Actions</SharedActions>
       </Content>
     </Container>
   );
@@ -37,10 +55,10 @@ const Content = styled.div`
   display: flex;
   top: 32px;
   margin: 0 auto;
+  flex-direction: column;
 `;
 
 const Header = styled.div`
-  width: 100%;
   padding: 16px 20px;
   line-height: 1.5;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
@@ -64,7 +82,7 @@ const Header = styled.div`
     align-items: center;
 
     &:hover {
-      background: rgba(0, 0, 0, 0.15);
+      background: rgba(0, 0, 0, 0.08);
     }
 
     img {
@@ -74,3 +92,44 @@ const Header = styled.div`
     }
   }
 `;
+
+const SharedContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  padding: 16px 20px;
+
+  div:first-child {
+    margin-right: 5px;
+    a {
+      img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  div:nth-child(2) {
+    a {
+      font-size: 16px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.8);
+      line-height: 1.5;
+    }
+  }
+`;
+
+const SharedActions = styled.div``;
+
+const mapStateToProps = (state: any) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+export default connect(mapStateToProps)(PostModal);
