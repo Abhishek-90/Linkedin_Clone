@@ -81,7 +81,9 @@ function PostModal(props: any) {
                   <span>Anyone</span>
                 </AssetButton>
               </SharedComment>
-              <PostButton>Post</PostButton>
+              <PostButton disabled={!editorText ? true : false}>
+                Post
+              </PostButton>
             </SharedCreations>
           </Content>
         </Container>
@@ -99,6 +101,7 @@ const Container = styled.div`
   color: black;
   z-index: 999;
   background-color: rgba(0, 0, 0, 0.8);
+  animation: fadeIn 0.3s;
 `;
 
 const Content = styled.div`
@@ -245,6 +248,14 @@ const PostButton = styled.button`
 
   &:hover {
     background: #004182;
+  }
+
+  &:disabled {
+    background: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.8);
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
   }
 `;
 
