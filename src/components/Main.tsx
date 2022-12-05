@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { connect } from "react-redux";
+import PostModal from "./PostModal";
 
 function Main(props: any) {
   return (
@@ -91,6 +92,7 @@ function Main(props: any) {
           </SocialActions>
         </ArticleBox>
       </div>
+      <PostModal />
     </Container>
   );
 }
