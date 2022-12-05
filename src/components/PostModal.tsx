@@ -1,73 +1,92 @@
+import { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
 function PostModal(props: any) {
+  const [editorText, setEditorText] = useState<any>("");
+  const reset = (e: any) => {
+    setEditorText("");
+    props.handleClick(e);
+  };
+
   return (
-    <Container>
-      <Content>
-        <Header>
-          <h2>Create a Post</h2>
-          <button>
-            <img src="/images/close.svg" alt="" />
-          </button>
-        </Header>
-        <SharedContent>
-          <UserInfo>
-            <div>
-              <a>
-                {props.user && props.user.photoURL ? (
-                  <img src={props.user.photoURL} alt="" />
-                ) : (
-                  <img src="/images/user.svg" alt="" />
-                )}
-              </a>
-            </div>
-            <div>
-              <a>{props.user?.displayName}</a>
-            </div>
-          </UserInfo>
-        </SharedContent>
-        <SharedCreations>
-          <AttachAssets>
-            <AssetButton>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                data-supported-dps="24x24"
-                fill="currentColor"
-                className="mercado-match"
-                width="24"
-                height="24"
-                focusable="false"
-              >
-                <path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm1 13a1 1 0 01-.29.71L16 14l-2 2-6-6-4 4V7a1 1 0 011-1h14a1 1 0 011 1zm-2-7a2 2 0 11-2-2 2 2 0 012 2z"></path>
-              </svg>
-            </AssetButton>
-            <AssetButton>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                data-supported-dps="24x24"
-                fill="currentColor"
-                className="mercado-match"
-                width="24"
-                height="24"
-                focusable="false"
-              >
-                <path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm-9 12V8l6 4z"></path>
-              </svg>
-            </AssetButton>
-          </AttachAssets>
-          <SharedComment>
-            <AssetButton>
-              <img src="/images/post-comment.svg" alt="" />
-              <span>Anyone</span>
-            </AssetButton>
-          </SharedComment>
-          <PostButton>Post</PostButton>
-        </SharedCreations>
-      </Content>
-    </Container>
+    <>
+      {props.showModal === "open" && (
+        <Container>
+          <Content>
+            <Header>
+              <h2>Create a Post</h2>
+              <button onClick={(e: any) => reset(e)}>
+                <img src="/images/close.svg" alt="" />
+              </button>
+            </Header>
+            <SharedContent>
+              <UserInfo>
+                <div>
+                  <a>
+                    {props.user && props.user.photoURL ? (
+                      <img src={props.user.photoURL} alt="" />
+                    ) : (
+                      <img src="/images/user.svg" alt="" />
+                    )}
+                  </a>
+                </div>
+                <div>
+                  <a>{props.user?.displayName}</a>
+                </div>
+              </UserInfo>
+              <Editor>
+                <textarea
+                  value={editorText}
+                  onChange={(e: any) => setEditorText(e.target.value)}
+                  placeholder="What do you want to talk about?"
+                  autoFocus={true}
+                ></textarea>
+              </Editor>
+            </SharedContent>
+            <SharedCreations>
+              <AttachAssets>
+                <AssetButton>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    data-supported-dps="24x24"
+                    fill="currentColor"
+                    className="mercado-match"
+                    width="24"
+                    height="24"
+                    focusable="false"
+                  >
+                    <path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm1 13a1 1 0 01-.29.71L16 14l-2 2-6-6-4 4V7a1 1 0 011-1h14a1 1 0 011 1zm-2-7a2 2 0 11-2-2 2 2 0 012 2z"></path>
+                  </svg>
+                </AssetButton>
+                <AssetButton>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    data-supported-dps="24x24"
+                    fill="currentColor"
+                    className="mercado-match"
+                    width="24"
+                    height="24"
+                    focusable="false"
+                  >
+                    <path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm-9 12V8l6 4z"></path>
+                  </svg>
+                </AssetButton>
+              </AttachAssets>
+              <SharedComment>
+                <AssetButton>
+                  <img src="/images/post-comment.svg" alt="" />
+                  <span>Anyone</span>
+                </AssetButton>
+              </SharedComment>
+              <PostButton>Post</PostButton>
+            </SharedCreations>
+          </Content>
+        </Container>
+      )}
+    </>
   );
 }
 
@@ -123,10 +142,12 @@ const Header = styled.div`
       background: rgba(0, 0, 0, 0.08);
     }
 
+    svg,
     img {
       width: 24px;
       height: 24px;
       margin: 0 auto;
+      pointer-events: none;
     }
   }
 `;
@@ -135,12 +156,12 @@ const SharedContent = styled.div`
   display: flex;
   flex-direction: column;
   background-color: transparent;
+  padding: 16px 20px;
 `;
 
 const UserInfo = styled.div`
   display: flex;
-  padding: 16px 20px;
-
+  margin-bottom: 12px;
   div:first-child {
     margin-right: 5px;
     a {
@@ -224,6 +245,16 @@ const PostButton = styled.button`
 
   &:hover {
     background: #004182;
+  }
+`;
+
+const Editor = styled.div`
+  display: flex;
+
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    resize: none;
   }
 `;
 
