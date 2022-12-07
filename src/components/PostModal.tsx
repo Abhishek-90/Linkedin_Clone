@@ -1,11 +1,36 @@
 import { useState } from "react";
 import { connect } from "react-redux";
+import ReactPlayer from "react-player";
 import styled from "styled-components";
 
 function PostModal(props: any) {
   const [editorText, setEditorText] = useState<any>("");
+  const [shareImage, setShareImage] = useState<any>("");
+  const [videoLink, setVideoLink] = useState<any>("");
+  const [assetArea, setAssetArea] = useState<any>("");
+
+  const handleChange = (e: any) => {
+    const image = e.target.files[0];
+
+    if (image === null || image === undefined) {
+      alert(`Invalid image, type is ${typeof image}`);
+      return;
+    }
+
+    setShareImage(image);
+  };
+
+  const switchAssetArea = (area: any) => {
+    setShareImage("");
+    setVideoLink("");
+    setAssetArea(area);
+  };
+
   const reset = (e: any) => {
     setEditorText("");
+    setShareImage("");
+    setVideoLink("");
+    setAssetArea("");
     props.handleClick(e);
   };
 
@@ -41,12 +66,43 @@ function PostModal(props: any) {
                   onChange={(e: any) => setEditorText(e.target.value)}
                   placeholder="What do you want to talk about?"
                   autoFocus={true}
-                ></textarea>
+                />
+                {assetArea === "image" && (
+                  <UploadImage>
+                    <input
+                      type="file"
+                      accept="image/gif, image/jpeg, image/png"
+                      name="image"
+                      id="file"
+                      style={{ display: "none" }}
+                      onChange={handleChange}
+                    />
+                    <p>
+                      <label htmlFor="file">Select an Image to share</label>
+                    </p>
+                    {shareImage && (
+                      <img src={URL.createObjectURL(shareImage)} alt="" />
+                    )}
+                  </UploadImage>
+                )}
+                {assetArea === "video" && (
+                  <>
+                    <input
+                      type="text"
+                      placeholder="Please enter a video URL"
+                      onChange={(e: any) => setVideoLink(e.target.value)}
+                      value={videoLink}
+                    />
+                    {videoLink && (
+                      <ReactPlayer width={"100%"} url={videoLink} />
+                    )}
+                  </>
+                )}
               </Editor>
             </SharedContent>
             <SharedCreations>
               <AttachAssets>
-                <AssetButton>
+                <AssetButton onClick={() => setAssetArea("image")}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -60,7 +116,7 @@ function PostModal(props: any) {
                     <path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm1 13a1 1 0 01-.29.71L16 14l-2 2-6-6-4 4V7a1 1 0 011-1h14a1 1 0 011 1zm-2-7a2 2 0 11-2-2 2 2 0 012 2z"></path>
                   </svg>
                 </AssetButton>
-                <AssetButton>
+                <AssetButton onClick={() => setAssetArea("video")}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -160,6 +216,7 @@ const SharedContent = styled.div`
   flex-direction: column;
   background-color: transparent;
   padding: 16px 20px;
+  overflow-y: auto;
 `;
 
 const UserInfo = styled.div`
@@ -260,12 +317,25 @@ const PostButton = styled.button`
 `;
 
 const Editor = styled.div`
-  display: flex;
-
   textarea {
     width: 100%;
     min-height: 100px;
     resize: none;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 6px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+`;
+
+const UploadImage = styled.div`
+  text-align: center;
+
+  img {
+    width: 100%;
   }
 `;
 
@@ -275,4 +345,6 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(PostModal);
+const mapDispatchToProps = (dispatch: any) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostModal);
