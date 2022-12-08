@@ -1,6 +1,6 @@
 import db, { auth, provider, storage } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
-import { SET_USER } from "./actionType";
+import { SET_LOADING_STATUS, SET_USER } from "./actionType";
 import { collection, doc, DocumentReference, setDoc } from "firebase/firestore";
 import {
   ref,
@@ -46,6 +46,7 @@ export function signOutAPI() {
 
 export function postArticleAPI(payload: any) {
   return (dispatch: any) => {
+    dispatch(setLoading(true));
     if (payload.image !== "") {
       const storageReference: StorageReference = ref(
         storage,
@@ -79,6 +80,7 @@ export function postArticleAPI(payload: any) {
             comments: 0,
             description: payload.description,
           });
+          dispatch(setLoading(false));
         }
       );
     } else if (payload.video !== "") {
@@ -95,6 +97,12 @@ export function postArticleAPI(payload: any) {
         comments: 0,
         description: payload.description,
       });
+      dispatch(setLoading(false));
     }
   };
 }
+
+export const setLoading = (status: any) => ({
+  type: SET_LOADING_STATUS,
+  status: status,
+});

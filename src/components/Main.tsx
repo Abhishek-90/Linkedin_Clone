@@ -35,7 +35,9 @@ function Main(props: any) {
           ) : (
             <img src="/images/user.svg" alt="user" />
           )}
-          <button onClick={handleClick}>Start a Post</button>
+          <button disabled={props.loading} onClick={handleClick}>
+            Start a Post
+          </button>
         </div>
         <div>
           <button>
@@ -56,7 +58,9 @@ function Main(props: any) {
           </button>
         </div>
       </ShareBox>
-      <div>
+      <Content>
+        {props.loading && <img src="/images/spinner.svg" alt="" />}
+
         <ArticleBox>
           <SharedActor>
             <a>
@@ -114,7 +118,8 @@ function Main(props: any) {
             </button>
           </SocialActions>
         </ArticleBox>
-      </div>
+      </Content>
+
       <PostModal showModal={showModal} handleClick={handleClick} />
     </Container>
   );
@@ -339,9 +344,17 @@ const SocialActions = styled.div`
   }
 `;
 
+const Content = styled.div`
+  text-align: center;
+  & > img {
+    width: 30px;
+  }
+`;
+
 const mapStateToProps = (state: any) => {
   return {
     user: state.userState.user,
+    loading: state.articleState.loading,
   };
 };
 
