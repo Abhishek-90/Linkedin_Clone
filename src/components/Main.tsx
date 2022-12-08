@@ -25,8 +25,6 @@ function Main(props: any) {
         setShowModal("close");
         break;
     }
-
-    console.log(showModal);
   };
   return (
     <Container>
