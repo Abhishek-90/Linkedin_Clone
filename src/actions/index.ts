@@ -1,7 +1,6 @@
 import db, { auth, provider, storage } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 import { SET_LOADING_STATUS, SET_USER } from "./actionType";
-import { collection, doc, DocumentReference, setDoc } from "firebase/firestore";
 import {
   ref,
   StorageReference,
@@ -9,6 +8,8 @@ import {
   UploadTaskSnapshot,
   getDownloadURL,
 } from "firebase/storage";
+import { DispatchProp } from "react-redux";
+import { child, get, ref as dbref, set } from "firebase/database";
 
 export const setUser = (payload: any) => ({
   type: SET_USER,
@@ -67,8 +68,7 @@ export function postArticleAPI(payload: any) {
         (error: any) => console.log(error.code),
         async () => {
           const downloadURL: String = await getDownloadURL(storageReference);
-          const articleRef: DocumentReference = doc(collection(db, "articles"));
-          await setDoc(articleRef, {
+          set(dbref(db, "articles"), {
             actor: {
               description: payload.user.email,
               title: payload.user.displayName,
@@ -84,8 +84,7 @@ export function postArticleAPI(payload: any) {
         }
       );
     } else if (payload.video !== "") {
-      const articleRef: DocumentReference = doc(collection(db, "articles"));
-      setDoc(articleRef, {
+      set(dbref(db, "articles"), {
         actor: {
           description: payload.user.email,
           title: payload.user.displayName,
@@ -97,6 +96,7 @@ export function postArticleAPI(payload: any) {
         comments: 0,
         description: payload.description,
       });
+
       dispatch(setLoading(false));
     }
   };
