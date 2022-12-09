@@ -93,6 +93,7 @@ export function postArticleAPI(payload: any) {
           dispatch(setLoading(false));
         }
       );
+      dispatch(setLoading(false));
     } else if (payload.video !== "") {
       const articleRef: DocumentReference = doc(collection(db, "articles"));
       setDoc(articleRef, {
@@ -107,9 +108,23 @@ export function postArticleAPI(payload: any) {
         comments: 0,
         description: payload.description,
       });
+      dispatch(setLoading(false));
+    } else {
+      const articleRef: DocumentReference = doc(collection(db, "articles"));
+      setDoc(articleRef, {
+        actor: {
+          description: payload.user.email,
+          title: payload.user.displayName,
+          date: payload.timestamp,
+          image: payload.user.photoURL,
+        },
+        video: "",
+        sharedImg: "",
+        comments: 0,
+        description: payload.description,
+      });
+      dispatch(setLoading(false));
     }
-
-    dispatch(setLoading(false));
   };
 }
 
