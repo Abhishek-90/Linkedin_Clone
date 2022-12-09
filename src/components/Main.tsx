@@ -360,6 +360,7 @@ const mapStateToProps = (state: any) => {
   return {
     user: state.userState.user,
     loading: state.articleState.loading,
+    articles: state.articleState.articles,
   };
 };
 

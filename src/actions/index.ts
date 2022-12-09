@@ -1,6 +1,6 @@
 import db, { auth, provider, storage } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
-import { SET_LOADING_STATUS, SET_USER } from "./actionType";
+import { GET_ARTICLES, SET_LOADING_STATUS, SET_USER } from "./actionType";
 import {
   ref,
   StorageReference,
@@ -8,7 +8,6 @@ import {
   UploadTaskSnapshot,
   getDownloadURL,
 } from "firebase/storage";
-import { DispatchProp } from "react-redux";
 import {
   collection,
   doc,
@@ -17,7 +16,9 @@ import {
   getDocs,
   query,
   QuerySnapshot,
+  orderBy,
 } from "firebase/firestore";
+import { Dispatch } from "redux";
 
 export const setUser = (payload: any) => ({
   type: SET_USER,
@@ -117,11 +118,17 @@ export const setLoading = (status: any) => ({
   status: status,
 });
 
+export const getArticles = (articles: any) => ({
+  type: GET_ARTICLES,
+  articles: articles,
+});
+
 export const getArticlesAPI = () => {
-  return async (dispatch: DispatchProp) => {
+  return async (dispatch: Dispatch) => {
     const docSnap: QuerySnapshot = await getDocs(
-      query(collection(db, "articles"))
+      query(collection(db, "articles"), orderBy("actor.date", "desc"))
     );
-    const payload: any = docSnap.docs.map((doc) => doc.data());
+    const articles: any = docSnap.docs.map((doc) => doc.data());
+    dispatch(getArticles(articles));
   };
 };
