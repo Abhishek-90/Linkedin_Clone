@@ -9,7 +9,15 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { DispatchProp } from "react-redux";
-import { child, get, ref as dbref, set } from "firebase/database";
+import {
+  collection,
+  doc,
+  DocumentReference,
+  setDoc,
+  getDocs,
+  query,
+  QuerySnapshot,
+} from "firebase/firestore";
 
 export const setUser = (payload: any) => ({
   type: SET_USER,
@@ -68,7 +76,8 @@ export function postArticleAPI(payload: any) {
         (error: any) => console.log(error.code),
         async () => {
           const downloadURL: String = await getDownloadURL(storageReference);
-          set(dbref(db, "articles"), {
+          const articleRef: DocumentReference = doc(collection(db, "articles"));
+          await setDoc(articleRef, {
             actor: {
               description: payload.user.email,
               title: payload.user.displayName,
@@ -84,7 +93,8 @@ export function postArticleAPI(payload: any) {
         }
       );
     } else if (payload.video !== "") {
-      set(dbref(db, "articles"), {
+      const articleRef: DocumentReference = doc(collection(db, "articles"));
+      setDoc(articleRef, {
         actor: {
           description: payload.user.email,
           title: payload.user.displayName,
@@ -96,9 +106,9 @@ export function postArticleAPI(payload: any) {
         comments: 0,
         description: payload.description,
       });
-
-      dispatch(setLoading(false));
     }
+
+    dispatch(setLoading(false));
   };
 }
 
@@ -106,3 +116,12 @@ export const setLoading = (status: any) => ({
   type: SET_LOADING_STATUS,
   status: status,
 });
+
+export const getArticlesAPI = () => {
+  return async (dispatch: DispatchProp) => {
+    const docSnap: QuerySnapshot = await getDocs(
+      query(collection(db, "articles"))
+    );
+    const payload: any = docSnap.docs.map((doc) => doc.data());
+  };
+};
