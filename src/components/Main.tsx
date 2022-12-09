@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PostModal from "./PostModal";
 import { useState, useEffect } from "react";
 import { getArticlesAPI } from "../actions";
+import ReactPlayer from "react-player";
 
 function Main(props: any) {
   const [showModal, setShowModal] = useState<String>("close");
@@ -89,13 +90,17 @@ function Main(props: any) {
                       </button>
                     </SharedActor>
                     <Description>{article.description}</Description>
-                    {article.sharedImg && (
-                      <SharedImg>
+                    <SharedImg>
+                      {article.sharedImg && (
                         <a>
                           <img src={article.sharedImg} alt="" />
                         </a>
-                      </SharedImg>
-                    )}
+                      )}
+
+                      {article.video && (
+                        <ReactPlayer width="100%" url={article.video} />
+                      )}
+                    </SharedImg>
                     <SocialCount>
                       <li>
                         <button>
