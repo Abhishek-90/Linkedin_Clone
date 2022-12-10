@@ -350,7 +350,7 @@ const Editor = styled.div`
 
   input {
     width: 100%;
-    padding: 12px 6px;
+    padding: 6px 0 6px 6px;
     font-size: 14px;
     line-height: 1.5;
   }
