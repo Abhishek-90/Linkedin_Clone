@@ -26,7 +26,7 @@ export const setUser = (payload: any) => ({
 });
 
 export function signInAPI() {
-  return (dispatch: any) => {
+  return (dispatch: Dispatch) => {
     signInWithPopup(auth, provider)
       .then((payload: any) => dispatch(setUser(payload.user)))
       .catch((e: any) => alert(e.message));
@@ -34,7 +34,7 @@ export function signInAPI() {
 }
 
 export function getUserAuth() {
-  return (dispatch: any) => {
+  return (dispatch: Dispatch) => {
     auth.onAuthStateChanged(async (user: any) => {
       if (user) {
         dispatch(setUser(user));
@@ -44,7 +44,7 @@ export function getUserAuth() {
 }
 
 export function signOutAPI() {
-  return (dispatch: any) => {
+  return (dispatch: Dispatch) => {
     auth
       .signOut()
       .then(() => {
@@ -55,7 +55,7 @@ export function signOutAPI() {
 }
 
 export function postArticleAPI(payload: any) {
-  return (dispatch: any) => {
+  return (dispatch: Dispatch) => {
     dispatch(setLoading(true));
     if (payload.image !== "") {
       const storageReference: StorageReference = ref(
