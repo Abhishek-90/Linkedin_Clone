@@ -358,7 +358,12 @@ const Editor = styled.div`
 
 const UploadImage = styled.div`
   text-align: center;
-
+  & > p > label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0a66c2;
+    cursor: pointer;
+  }
   img {
     width: 100%;
   }
